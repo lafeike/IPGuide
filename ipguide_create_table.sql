@@ -22,7 +22,7 @@ CREATE TABLE stp_online.dbo.IPGuideRequestClient
     contact_lastname varchar(50) NULL,
 	contact_number nchar(18) null,
 	rep nchar(10) null,
-	client_type char(1) not null --1: industry specific; 2: IP's; 3: Mining; 4: ISO; 5: Convergence
+	client_type char(1) not null --1: industry specific; 2: IPs; 3: Mining; 4: ISO; 5: Convergence
 );
 
 -- client ip request

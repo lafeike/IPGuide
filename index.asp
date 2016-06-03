@@ -45,11 +45,11 @@
         </div>
     </div>
     <hr />
-
+    <div id="feedback_to_user" class="bg-warning text-warning"></div>
     <%  'SQL to get the IPGuideRequestRecord by the userid
         dim SQL
         dim UserID
-        'UserID = 438 'for developing only, should be commented and use the next line when released.
+        'UserID = 422 'for developing only, should be commented and use the next line when released.
         UserID = Session("stp_userid")
         SQL = "select " &_
             "ipclient.clientname client, ipclient.id clientid, ipclient.contact_firstname contact, " &_
@@ -72,37 +72,37 @@
                                 "client, clientid, contact, contact_number,ip_request " &_
                                 "from (" & SQL &_
                                 ") ct " 
-        Set sqlcmd = Server.CreateObject("ADODB.command") 
-           sqlcmd.ActiveConnection = conn                       
-           sqlcmd.CommandText = ipSQL 
-           sqlcmd.CommandType = adCmdText
-           sqlcmd.Prepared = true
-       
+        iptype = Request.QueryString("iptype")
+        if len(iptype) = 0 then
+            iptype = "IPs" 'default value
+        end if
     %>
 
     <ul class="nav nav-pills">
-      <li class="active"><a data-toggle="pill" href="#ips">IP's</a></li>
-      <li><a data-toggle="pill" href="#mining">Mining</a></li>
-      <li><a data-toggle="pill" href="#iso">ISO</a></li>
-      <li><a data-toggle="pill" href="#convergence">Convergence</a></li>
+      <li class="active"><a data-toggle="pill" href="#IPs">IPs</a></li>
+      <li><a data-toggle="pill" href="#Mining">Mining</a></li>
+      <li><a data-toggle="pill" href="#ISO">ISO</a></li>
+      <li><a data-toggle="pill" href="#Convergence">Convergence</a></li>
     </ul>
 
-    <div class="tab-content">
-        <div id="ips" class="tab-pane fade in active" data-userid="<%=UserID%>">       
-            <div class="control-group">
+    <div class="tab-content" data-ipactive="<%= iptype %>">
+        
+        <div class="control-group">
                 <div class="controls control-row">
                     <div class="span1 offset7">
-                        <a href="search.asp" class="btn">Search</a> 
+                        <a href="search.asp?iptype=IPs" class="btn" id="searchBtn">Search</a> 
                     </div>
                      <div class="span1">
                         <a href="report.asp" class="btn">Report</a> 
                     </div>
                     <div class="span1">
-                        <a href="add.asp" class="btn">Add</a> 
+                        <a href="add.asp?iptype=IPs" class="btn" id="addBtn">Add</a> 
                     </div>               
                 </div> 
-            </div><br /><br />  
-            <div id="feedback_to_user" class="bg-warning text-warning"></div>                
+            </div><br /><br />        
+        <div id="IPs" class="tab-pane fade in active" data-userid="<%=UserID%>">       
+             
+                     
             <table  class="usertable table table-striped table-hover table-responsive">
                 <thead>
                     <tr>
@@ -115,7 +115,12 @@
                 </thead>
                 <tbody class="myTable">
                     <%
-                         iptype = "IP's"                        
+                        iptype = "IPs"                        
+                        Set sqlcmd = Server.CreateObject("ADODB.command") 
+           sqlcmd.ActiveConnection = conn                       
+           sqlcmd.CommandText = ipSQL 
+           sqlcmd.CommandType = adCmdText
+           sqlcmd.Prepared = true
                         set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
                         sqlcmd.Parameters.Append prm1
                         'response.Write sqlcmd.CommandText
@@ -136,7 +141,7 @@
                         <!--<td><%=rs("contact_number")%> </td>-->
                     
                         <td>
-                            <select class="selectpicker" data-iptype="ip''s" 
+                            <select class="selectpicker" data-iptype="<%= iptype %>" 
                                 data-clientid="<%=rs("clientid")%>" 
                                 data-req_num="<%= rs("ip_request") %>" 
                                 <% 
@@ -147,8 +152,8 @@
                              >
                               <option><%=rs("ip_request")%></option>                          
                             </select>&nbsp;
-                            <a href="#" data-client="<%=rs("clientid")%>" data-iptype="ip''s" class="EditIPGuideRecord">Edit</a>
-                            <a href="#" data-client="<%=rs("clientid")%>" data-iptype="ip''s" class="deleteClient">Delete client</a>
+                            <a href="#" data-client="<%=rs("clientid")%>" class="EditIPGuideRecord">Edit</a>
+                            <a href="#" data-client="<%=rs("clientid")%>" class="deleteClient">Delete client</a>
                             <div id="<%=rs("clientid")%>" title="Delete the Client?" class="dialog-confirm" >
                                 <p>
                                     <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
@@ -166,21 +171,7 @@
             </table>
             
         </div>
-        <div id="mining" class="tab-pane fade">
-                <div class="control-group">
-                <div class="controls control-row">
-                    <div class="span1 offset7">
-                        <a href="search.asp" class="btn">Search</a> 
-                    </div>
-                     <div class="span1">
-                        <a href="report.asp" class="btn">Report</a> 
-                    </div>
-                    <div class="span1">
-                        <a href="add.asp" class="btn">Add</a> 
-                    </div>               
-                </div> 
-            </div><br /><br />  
-            <div  class="bg-warning text-warning feedback_to_user"></div>                
+        <div id="Mining" class="tab-pane fade"  data-userid="<%=UserID%>">
             <table  class="usertable table table-striped table-hover table-responsive">
                 <thead>
                     <tr>
@@ -192,13 +183,17 @@
                     </tr>
                 </thead>
                 <tbody class="myTable">
-                    <%
-                        
+                    <%  
                         iptype = "Mining"
-                        
-                        prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)
-                       
+                                            
+                        Set sqlcmd = Server.CreateObject("ADODB.command") 
+           sqlcmd.ActiveConnection = conn                       
+           sqlcmd.CommandText = ipSQL 
+           sqlcmd.CommandType = adCmdText
+           sqlcmd.Prepared = true
+                         set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
                         sqlcmd.Parameters.Append prm1
+                        
                         'response.Write sqlcmd.CommandText
                         set rs = server.CreateObject("ADODB.Recordset")
                         set rs = sqlcmd.Execute()
@@ -210,15 +205,15 @@
                                 trclass=""
                             end if
                     %>
-                    <tr <%=trclass %>>
-                        <td><%=rs("noo")%></td>
-                        <td><%=rs("client")%></td>
-                        <td><%=rs("contact")%></td>
+                    <tr <%= trclass %>>
+                        <td><%= rs("noo")%></td>
+                        <td><%= rs("client")%></td>
+                        <td><%= rs("contact")%></td>
                         <!--<td><%=rs("contact_number")%> </td>-->
                     
                         <td>
-                            <select class="selectpicker" data-iptype="ip''s" 
-                                data-clientid="<%=rs("clientid")%>" 
+                            <select class="selectpicker" data-iptype="<%= iptype %>" 
+                                data-clientid="<%= rs("clientid")%>" 
                                 data-req_num="<%= rs("ip_request") %>" 
                                 <% 
                                     if rs("ip_request") = 0 then
@@ -228,9 +223,9 @@
                              >
                               <option><%=rs("ip_request")%></option>                          
                             </select>&nbsp;
-                            <a href="#" data-client="<%=rs("clientid")%>" data-iptype="ip''s" class="EditIPGuideRecord">Edit</a>
-                            <a href="#" data-client="<%=rs("clientid")%>" data-iptype="ip''s" class="deleteClient">Delete client</a>
-                            <div id="<%=rs("clientid")%>" title="Delete the Client?" class="dialog-confirm" >
+                            <a href="#" data-client="<%= rs("clientid")%>" class="EditIPGuideRecord">Edit</a>
+                            <a href="#" data-client="<%= rs("clientid")%>" class="deleteClient">Delete client</a>
+                            <div id="<%= rs("clientid")%>" title="Delete the Client?" class="dialog-confirm" >
                                 <p>
                                     <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
                                     This item will be permanently deleted and cannot be recovered. Are you sure?
@@ -247,13 +242,13 @@
             </table>
            
         </div>
-        </div>
-        <div id="iso" class="tab-pane fade">
+       
+        <div id="ISO" class="tab-pane fade">
                 <h3>ISO</h3>
                 <h4>In constructing...</h4>
         
         </div>
-        <div id="convergence" class="tab-pane fade">
+        <div id="Convergence" class="tab-pane fade">
                 <h3>Convergence</h3>
                   <h4>In constructing...</h4>
         </div>
@@ -272,8 +267,7 @@
     </div>
     <div class="col-md-12 text-center">
                 <ul class="pagination pagination-sm" id="myPager"></ul>
-    </div>
-    
+    </div>    
 </div>
 <!-- /container -->
 <!-- #include virtual=/assets/lib/footer.asp -->
@@ -286,8 +280,10 @@
 %>
 <script type="text/javascript">
     $(document).ready(function () {
-        var userid = $('#ips').attr("data-userid");
+        var userid = $("#IPs").attr("data-userid");
         var data;
+        var activeTabName = $('.tab-content').attr("data-ipactive");
+        activeTab(activeTabName);
 
         $.get("checkRep.asp?userid=" + userid) // to check if the use has a Rep number
           .fail(function () {
@@ -296,7 +292,7 @@
         .done(function (data) {
             console.log(data);
             if (data != 0) {
-                $('#feedback_to_user').html(data);               
+                $('#feedback_to_user').html(data + "<hr>");               
             }
         });
 
@@ -353,7 +349,7 @@
                 Ok: function () {
                     $(this).dialog("close");
                     // refresh page
-                   window.location.replace("index.asp");
+                    window.location.replace("index.asp?iptype=" + activeTabName);
                 }
             }
         });
@@ -465,12 +461,12 @@
         var $this = $(this);
         var req_num = $this.attr("data-req_num");
         var client_id = $this.attr("data-clientid");
-        var ip_type = $this.attr("data-iptype")
+        var iptype = $('.tab-content').data("ipactive");
         if (req_num == 0) {
             $this.prop('disabled', 'disabled');
         } else {
             $.get(
-                        "FetchIPGuideList.asp?client_id=" + client_id + "&ip_type=" + ip_type + "&req_num=" + req_num,
+                        "FetchIPGuideList.asp?client_id=" + client_id + "&ip_type=" + iptype + "&req_num=" + req_num,
                         function (data) {
                             $this.html(data);
                             $this.simulate('mousedown');
@@ -483,14 +479,14 @@
     $(document).on("click", "a.EditIPGuideRecord", function (e) {
         e.preventDefault();
         var client = $(this).data("client");
-        var iptype = $(this).data("iptype");
+        var iptype = $('.tab-content').data("ipactive");
         $.get("editIPGuideRecord.asp?client=" + client + "&iptype=" + iptype, function (data) {
             var div = bootbox.dialog(data,
                     [{
                         "label": "<i class='icon-zoom-in'></i> Close",
                         "class": "btn-small btn-info no-border",
                         "callback": function () {
-                            window.location.reload();
+                            window.location.replace("/IPGuideRequest/index.asp?iptype=" + iptype);
                         }
                     }],
                     {
@@ -498,6 +494,21 @@
                     });
         })
     });
+
+    // when tab changed, set search button's link attribute.
+    $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href") // activated tab        
+        $('#searchBtn').attr("href", "search.asp?iptype=" + target.substring(1)); // skip the '#'
+        $('#addBtn').attr("href", "add.asp?iptype=" + target.substring(1)); // skip the '#'
+
+        $('.tab-content').attr("data-ipactive", target.substring(1));
+        $(this).tab('show');
+    });
+
+    function activeTab(tab) {
+        $('.nav-pills a[href="#' + tab + '"]').tab('show');
+    };
+   
 </script>
 <script src="/assets/js/jquery.simulate.js"></script>
 </body>

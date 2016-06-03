@@ -12,7 +12,7 @@
 <div class="container">
     <% dim ip_type %>
     <ul class="nav nav-pills">
-      <li class="active"><a data-toggle="pill" href="#ips">IP's</a></li>
+      <li class="active"><a data-toggle="pill" href="#ips">IPs</a></li>
       <li><a data-toggle="pill" href="#mining">Mining</a></li>
       <li><a data-toggle="pill" href="#iso">ISO</a></li>
       <li><a data-toggle="pill" href="#convergence">Convergence</a></li>
@@ -21,7 +21,7 @@
     <div class="tab-content">
         <h3>Report For IP Country Request</h3>
         <h4>&nbsp;<%= Date %> &nbsp;</h4>
-        <% ip_type = "IP's" %>
+        <% ip_type = "IPs" %>
         <div id="ips" class="tab-pane fade in active">       
             <div class="control-group">
                 <div class="row">
@@ -29,7 +29,7 @@
                         <a href="index.asp" class="btn">Back</a> 
                     </div>
                     <div class="span1">
-                            <a href="#" class="btn exportMe" data-iptype="IP's">Export</a> 
+                            <a href="#" class="btn exportMe" data-iptype="IPs">Export</a> 
                     </div>
                     <div class="span1">
                             <a href="#" class="btn printMe">Print</a>   
@@ -43,7 +43,7 @@
                         <a href="index.asp" class="btn">Back</a> 
                     </div>
                     <div class="span1">
-                        <a href="#" class="btn exportMe" data-iptype="IP's">Export</a> 
+                        <a href="#" class="btn exportMe" data-iptype="IPs">Export</a> 
                     </div>
                     <div class="span1">
                         <a href="#" class="btn printMe">Print</a>   

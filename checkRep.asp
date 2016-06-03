@@ -22,7 +22,7 @@
             Response.Write("Error: System error when visit database. Please contact the IT Department.")
     else
             if rs("rec_number") = 0 then
-                Response.Write("You don't have a Rep number. Some functionalities may not work properly.")
+                Response.Write("<strong>Warning:</strong><br>You don't have a <strong>Rep number</strong>. Some functionalities may not work properly.")
             else
                 Response.Write("0")
             end if

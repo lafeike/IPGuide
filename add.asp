@@ -7,8 +7,9 @@
 
 <div class="container">
     <%  'SQL to get the IPGuideRequestRecord by the userid       
-        dim UserID
+        dim UserID, iptype
         UserID = Session("stp_userid")       
+        iptype = Request.QueryString("iptype")
     %>
 
         <h3>Add A Client</h3>
@@ -16,7 +17,7 @@
         <div class="control-group">
                 <div class="row">
                     <div class="span1 offset8">
-                        <a href="index.asp" class="btn">Back</a> 
+                        <a href="index.asp?iptype=<%= iptype %>" class="btn">Back</a> 
                     </div>                              
                 </div> 
             </div>

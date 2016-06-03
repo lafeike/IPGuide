@@ -14,10 +14,7 @@
     ip_type = request("ip_type")
     ip_id = request("ip_id")
         
-    if ip_type = "ip''s" then
-        client_type = 2
-    end if    
-
+   
 	' to check if there is records of this ip
     SQL = 	"select count(*) record_num from IPGuideRequestRecord " &_
             "where client_id=" & client_id &_

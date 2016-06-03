@@ -11,30 +11,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-    .datalist {
-    }
-
-    .divider {
-        width: 5px;
-        height: auto;
-        display: inline-block;
-    }
-
-    .modal-body {
-        max-height: 520px;
-        padding: 15px;
-        overflow-y: auto;
-    }
-
-    .modal {
-        position: fixed;
-        width: 50%;
-        top: 50%;
-        left: 50%;
-        margin: -300px 0 0 -400px;
-    }
-</style>
+<% ' check 
+    dim iptype
+    iptype = Request.QueryString("iptype")   
+%>
 
 <div class="container">
     <div class="row">
@@ -55,35 +35,17 @@
     </div>
     <hr />
 
-    <%  'SQL to get the IPGuideRequestRecord by the userid
-        dim SQL
-        dim UserID
-        UserID = 438 'for developing only, should be commented and use the next line when released.
-        'UserID = Session("stp_userid")
-        SQL = "select " &_
-            "ipclient.clientname client, ipclient.id clientid, ipclient.contact_firstname contact, " &_
-            "ipclient.contact_number contact_number,isnull(record_number,0) ip_request, ipclient.client_type ctype " &_
-            "from IPGuideRequestClient ipClient " &_
-            "left join(" &_
-	        "select client_id, count(*) record_number from " &_
-	        "IPGuideRequestRecord " &_
-	        "group by client_id " &_
-	        ") ipRecord " &_
-            "on " &_
-	        "ipClient.id=ipRecord.client_id " &_
-            "where	ipClient.rep = " &_
-            "(select rep from ipGuideRep rep " &_
-            "where rep.UserID =" & UserID & ") "          
-    %>
+   
 
     <h3>Search</h3>
 
     <div class="tab-content">
         <div id="ips" class="tab-pane fade in active">
+            
             <div class="control-group">
                 <div class="controls">
                     <div class="span1 offset10">
-                        <a href="index.asp" class="btn active">Back</a>
+                        <a href="index.asp?iptype=<%= iptype %>" class="btn active">Back</a>
                     </div>
                 </div>
             </div>
@@ -97,18 +59,40 @@
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons" id="iptype">
                     <label class="radio-inline">
-                        <input type="radio" id="r1" name="options" value="IP''s" checked />
-                        IP's                          
+                        <input type="radio" id="r1" name="options" value="IPs" 
+                            <% 
+                                    if StrComp(iptype,"IPs",1) = 0 then
+                                          Response.Write("Checked")
+                                    end if  
+                                %>/>
+                        IPs                          
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" id="r2" name="options" value="Mining" />
+                        <input type="radio" id="r2" name="options" value="Mining" 
+                            <% 
+                                    
+                            if StrComp(iptype,"Mining",1) = 0 then
+                                          Response.Write("Checked")
+                                    end if  
+                                %>/>
                         Mining
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" id="r3" name="options" value="ISO" />ISO
+                        <input type="radio" id="r3" name="options" value="ISO" 
+                            <% 
+                                    if StrComp(iptype,"ISO",1) = 0 then
+                                          Response.Write("Checked")
+                                    end if  
+                                %>/>
+                        ISO
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" id="r4" name="options" value="Convergence" />
+                        <input type="radio" id="r4" name="options" value="Convergence" 
+                            <% 
+                                    if StrComp(iptype,"Convergence",1) = 0 then
+                                          Response.Write("Checked")
+                                    end if  
+                                %>/>
                         Convergence
                     </label>
                 </div>
@@ -153,10 +137,10 @@
     set conn = nothing
 %>
 <script type="text/javascript">
-    // when page loaded, populdate the dropdown list for IP's ip type
+    // when page loaded, populdate the dropdown list for IPs ip type
     $(document).ready(function () {
        
-            var jqxhr = $.getJSON("FetchSearchSelect.asp?iptype=IP''s", function (data) {
+            var jqxhr = $.getJSON("FetchSearchSelect.asp?iptype=IPs", function (data) {
                 //console.log(data);
                 $.each(data, function (key, val) {
                     //console.log(key);
