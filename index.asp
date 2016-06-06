@@ -48,9 +48,9 @@
     <div id="feedback_to_user" class="bg-warning text-warning"></div>
     <%  'SQL to get the IPGuideRequestRecord by the userid
         dim SQL
-        dim UserID
-        'UserID = 422 'for developing only, should be commented and use the next line when released.
-        UserID = Session("stp_userid")
+        'dim UserID
+        UserID = 412 'for developing only, should be commented and use the next line when released.
+        'UserID = Session("stp_userid")
         SQL = "select " &_
             "ipclient.clientname client, ipclient.id clientid, ipclient.contact_firstname contact, " &_
             "ipclient.contact_number contact_number,isnull(record_number,0) ip_request, ipclient.client_type ctype " &_
@@ -113,7 +113,7 @@
                         <th>IP request</th>                   
                     </tr>
                 </thead>
-                <tbody class="myTable">
+                <tbody id="ipTable">
                     <%
                         iptype = "IPs"                        
                         Set sqlcmd = Server.CreateObject("ADODB.command") 
@@ -169,7 +169,9 @@
                     %>
                 </tbody>
             </table>
-            
+             <div class="col-md-12 text-center">
+                <ul class="pagination pagination-sm" id="ipPager"></ul>
+            </div>  
         </div>
         <div id="Mining" class="tab-pane fade"  data-userid="<%=UserID%>">
             <table  class="usertable table table-striped table-hover table-responsive">
@@ -182,15 +184,14 @@
                         <th>IP request</th>                   
                     </tr>
                 </thead>
-                <tbody class="myTable">
+                <tbody id="miningTable">
                     <%  
-                        iptype = "Mining"
-                                            
+                        iptype = "Mining"   
                         Set sqlcmd = Server.CreateObject("ADODB.command") 
-           sqlcmd.ActiveConnection = conn                       
-           sqlcmd.CommandText = ipSQL 
-           sqlcmd.CommandType = adCmdText
-           sqlcmd.Prepared = true
+                           sqlcmd.ActiveConnection = conn                       
+                           sqlcmd.CommandText = ipSQL 
+                           sqlcmd.CommandType = adCmdText
+                           sqlcmd.Prepared = true
                          set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
                         sqlcmd.Parameters.Append prm1
                         
@@ -240,17 +241,154 @@
                     %>
                 </tbody>
             </table>
-           
+           <div class="col-md-12 text-center">
+                <ul class="pagination pagination-sm" id="miningPager"></ul>
+            </div>  
         </div>
        
         <div id="ISO" class="tab-pane fade">
-                <h3>ISO</h3>
-                <h4>In constructing...</h4>
-        
+            <table  class="usertable table table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th class="clientsort">Client</th>
+                        <th>Contact</th>
+                        <!--<th style="text-align: center">Contact number</th>-->
+                        <th>IP request</th>                   
+                    </tr>
+                </thead>
+                <tbody id="isoTable">
+                    <%  
+                        iptype = "ISO"   
+                        Set sqlcmd = Server.CreateObject("ADODB.command") 
+                           sqlcmd.ActiveConnection = conn                       
+                           sqlcmd.CommandText = ipSQL 
+                           sqlcmd.CommandType = adCmdText
+                           sqlcmd.Prepared = true
+                         set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
+                        sqlcmd.Parameters.Append prm1
+                        
+                        'response.Write sqlcmd.CommandText
+                        set rs = server.CreateObject("ADODB.Recordset")
+                        set rs = sqlcmd.Execute()
+                        
+                        While Not rs.EOF                        
+                            if rs("ip_request") > 0 then 'if there is a ip request, make the background color of this row blue
+                               trclass="class=""info"""
+                            else
+                                trclass=""
+                            end if
+                    %>
+                    <tr <%= trclass %>>
+                        <td><%= rs("noo")%></td>
+                        <td><%= rs("client")%></td>
+                        <td><%= rs("contact")%></td>
+                        <!--<td><%=rs("contact_number")%> </td>-->
+                    
+                        <td>
+                            <select class="selectpicker" data-iptype="<%= iptype %>" 
+                                data-clientid="<%= rs("clientid")%>" 
+                                data-req_num="<%= rs("ip_request") %>" 
+                                <% 
+                                    if rs("ip_request") = 0 then
+                                          Response.Write "disabled"
+                                    end if  
+                                %>
+                             >
+                              <option><%=rs("ip_request")%></option>                          
+                            </select>&nbsp;
+                            <a href="#" data-client="<%= rs("clientid")%>" class="EditIPGuideRecord">Edit</a>
+                            <a href="#" data-client="<%= rs("clientid")%>" class="deleteClient">Delete client</a>
+                            <div id="<%= rs("clientid")%>" title="Delete the Client?" class="dialog-confirm" >
+                                <p>
+                                    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                                    This item will be permanently deleted and cannot be recovered. Are you sure?
+                                </p>
+                            </div>
+                            <div class="CustomerDetails"></div>
+                        </td>
+                    </tr>
+                    <% 
+                        rs.MoveNext
+                        Wend 
+                    %>
+                </tbody>
+            </table>
+           <div class="col-md-12 text-center">
+                <ul class="pagination pagination-sm" id="isoPager"></ul>
+            </div>  
         </div>
         <div id="Convergence" class="tab-pane fade">
-                <h3>Convergence</h3>
-                  <h4>In constructing...</h4>
+               <table  class="usertable table table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th class="clientsort">Client</th>
+                        <th>Contact</th>
+                        <!--<th style="text-align: center">Contact number</th>-->
+                        <th>IP request</th>                   
+                    </tr>
+                </thead>
+                <tbody id="convergenceTable">
+                    <%  
+                        iptype = "Convergence"   
+                        Set sqlcmd = Server.CreateObject("ADODB.command") 
+                           sqlcmd.ActiveConnection = conn                       
+                           sqlcmd.CommandText = ipSQL 
+                           sqlcmd.CommandType = adCmdText
+                           sqlcmd.Prepared = true
+                         set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
+                        sqlcmd.Parameters.Append prm1
+                        
+                        'response.Write sqlcmd.CommandText
+                        set rs = server.CreateObject("ADODB.Recordset")
+                        set rs = sqlcmd.Execute()
+                        
+                        While Not rs.EOF                        
+                            if rs("ip_request") > 0 then 'if there is a ip request, make the background color of this row blue
+                               trclass="class=""info"""
+                            else
+                                trclass=""
+                            end if
+                    %>
+                    <tr <%= trclass %>>
+                        <td><%= rs("noo")%></td>
+                        <td><%= rs("client")%></td>
+                        <td><%= rs("contact")%></td>
+                        <!--<td><%=rs("contact_number")%> </td>-->
+                    
+                        <td>
+                            <select class="selectpicker" data-iptype="<%= iptype %>" 
+                                data-clientid="<%= rs("clientid")%>" 
+                                data-req_num="<%= rs("ip_request") %>" 
+                                <% 
+                                    if rs("ip_request") = 0 then
+                                          Response.Write "disabled"
+                                    end if  
+                                %>
+                             >
+                              <option><%=rs("ip_request")%></option>                          
+                            </select>&nbsp;
+                            <a href="#" data-client="<%= rs("clientid")%>" class="EditIPGuideRecord">Edit</a>
+                            <a href="#" data-client="<%= rs("clientid")%>" class="deleteClient">Delete client</a>
+                            <div id="<%= rs("clientid")%>" title="Delete the Client?" class="dialog-confirm" >
+                                <p>
+                                    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                                    This item will be permanently deleted and cannot be recovered. Are you sure?
+                                </p>
+                            </div>
+                            <div class="CustomerDetails"></div>
+                        </td>
+                    </tr>
+                    <% 
+                        rs.MoveNext
+                        Wend 
+                    %>
+                </tbody>
+            </table>
+           <div class="col-md-12 text-center">
+                <ul class="pagination pagination-sm" id="convergencePager"></ul>
+            </div>  
         </div>
         <div id="warn-message" class="dialog-message" title="Failed to delete">
           <p>
@@ -265,9 +403,7 @@
           </p>
         </div>
     </div>
-    <div class="col-md-12 text-center">
-                <ul class="pagination pagination-sm" id="myPager"></ul>
-    </div>    
+     
 </div>
 <!-- /container -->
 <!-- #include virtual=/assets/lib/footer.asp -->
@@ -296,8 +432,17 @@
             }
         });
 
-        $('.myTable').pageMe({
-            pagerSelector: '#myPager', showPrevNext: true, hidePageNumbers: false, perPage: 10
+        $('#ipTable').pageMe({
+            pagerSelector: '#ipPager', showPrevNext: true, hidePageNumbers: false, perPage: 10
+        });
+        $('#miningTable').pageMe({
+            pagerSelector: '#miningPager', showPrevNext: true, hidePageNumbers: false, perPage: 10
+        });
+        $('#isoTable').pageMe({
+            pagerSelector: '#isoPager', showPrevNext: true, hidePageNumbers: false, perPage: 10
+        });
+        $('#convergenceTable').pageMe({
+            pagerSelector: '#convergencePager', showPrevNext: true, hidePageNumbers: false, perPage: 10
         });
         
         $(".deleteClient").click(
@@ -461,7 +606,8 @@
         var $this = $(this);
         var req_num = $this.attr("data-req_num");
         var client_id = $this.attr("data-clientid");
-        var iptype = $('.tab-content').data("ipactive");
+        //var iptype = $('.tab-content').data("ipactive");
+        var iptype = $('.tab-content').attr("data-ipactive");
         if (req_num == 0) {
             $this.prop('disabled', 'disabled');
         } else {
@@ -500,7 +646,6 @@
         var target = $(e.target).attr("href") // activated tab        
         $('#searchBtn').attr("href", "search.asp?iptype=" + target.substring(1)); // skip the '#'
         $('#addBtn').attr("href", "add.asp?iptype=" + target.substring(1)); // skip the '#'
-
         $('.tab-content').attr("data-ipactive", target.substring(1));
         $(this).tab('show');
     });

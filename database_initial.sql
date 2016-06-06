@@ -150,7 +150,7 @@ insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_numbe
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('General Electric', 'McKund', '', '513 774 1004');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Goodyear', 'Dave Woodring', '', '330 796 0565');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Bridgestone', 'Debra Rollins', '', '615 937 1000');
-insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Chevron Phillips', 'Rick Lemons', '', '832 813 4222');
+--insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Chevron Phillips', 'Rick Lemons', '', '832 813 4222');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Veoliaes', 'Kevin McGrath', '', '402 991 6666');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Waste Connection', 'Tom Riley', '', '925 672 3800');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Wastequip', 'Rick Daudert ', '', '1800 645 7106 x116');
@@ -166,12 +166,12 @@ insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_numbe
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Nippon Express', 'William Tanaka', '89', '310-535-7297');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Nike', '', '733', '');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Avon', '', '733', '');
-insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Borden Ladner Gervais', 'David Farmer', '89', '');
-insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Tervita', 'Shad Watts', '89','');
-insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('AIL Mining', '', '89', '');
+--insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Borden Ladner Gervais', 'David Farmer', '89', '');
+--insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Tervita', 'Shad Watts', '89','');
+--insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('AIL Mining', '', '89', '');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Propak', 'Deb Hlushak', '733','');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Texas United', '', '732', '');
-insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('The Benteler Group', '', '735','');
+--insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('The Benteler Group', '', '735','');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Luminant', 'Gene Rek', '730/188', '');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('US Silica', '', '735','');
 insert into IPGuideRequestClient (clientname,contact_firstname,rep,contact_number) values('Fenner Dunlop', '', '735', '');
@@ -310,7 +310,7 @@ RPM International		89
 Xylem	Luis Salinas	188
 	*/
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Polaris Seismic Int', '', '188');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Parker Drilling', '', '188');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Parker Drilling', '', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Agrium', 'Jack MacGregor', '736');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Calfrac Well Services', 'Bob Brownlee', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Teva Pharma', '', '717');
@@ -343,7 +343,7 @@ insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Center
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Pika International Inc', 'Srini Neraha', '278');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Fruit of the Loom', 'Barbara Veith ', '732');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Transalta', '', '188');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron', 'Scott Haney', '188');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron', 'Scott Haney', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Invista', 'Judith Ciulis', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Gates International (Corp.)', 'Ron Stiles', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Norbrook Labs', 'Stephen Mitchell', '188');
@@ -356,17 +356,17 @@ insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Lubriz
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('URS', '', '');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Avery Dennison', 'Scott Snyder', '717');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('McMahon&Degullis (STC Client)', 'Melanie @ STC', '717');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron Phillips', 'Jerry Smith', '188');
+insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron Phillips', 'Rick Lemons/Jerry Smith', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Sealed Air', 'David Day', '732');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Delphi Corporation', 'Salish Patel', '735');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Hoffman LaRoche', 'Bob Moody', '188');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Hoffman LaRoche', 'Johannes Pudewell', '188');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Environ', 'Christine Anastos', '188');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Environ', 'Nina Cross', '188');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Hoffman LaRoche', 'Bob Moody', '188');
+insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Hoffman LaRoche', 'Bob Moody/Johannes Pudewell', '188');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Environ', 'Christine Anastos', '188');
+insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Environ', 'Christine Anastos/Nina Cross', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Occidental Petroleum', 'Chris Young/Matt Barmasse', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Parker Drilling', '', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('HESS Corporation', 'Mark Fox', '732');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron', '', '188');
+insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Chevron', 'Scott Haney', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Redco Construction', '', '736');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Seagate', 'Rose Khan ', '717/732');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Van Breusegen & Associates', '', '188');
@@ -377,14 +377,14 @@ insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('AGC Gl
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Jarden', '', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Mead Westvaco', '', '736');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Dresser Rand', 'Greg Stubs', '735');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Ecolab', 'Laura Schaffer', '736');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Ecolab', 'Gary Williams', '736');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Ecolab', 'Laura Schaffer', '736');
+insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Ecolab', 'Laura Schaffer/Gary Williams', '736');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Smith Management Group', 'Clayton Whitney', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Borden Ladner Gervais', 'David Farmer', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('GE', 'Gretchen Hancock', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Jost Chemical', 'Jim Moore', '188');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Axalta', 'Jill Henry', '736');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Agrium', 'Jack MacGregor', '736');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Agrium', 'Jack MacGregor', '736');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Atlas Copco', 'VJ', '');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Schneider Electric', 'Bryce Wendland/Kent Chai', '735');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Williams Energy Services', 'Mark Gebbia', '188');
@@ -403,7 +403,7 @@ insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Amec',
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Beam Global Spirits', '', '188/717');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('GWL Realty Advisors', '', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Gulf Drilling International', 'Andrew Scarry', '89');
-insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('RPS Group', '', '89');
+--insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('RPS Group', '', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Cardinal Health', 'Jim Cline', '732');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('ERM Calgary', '', '89');
 insert into IPGuideRequestClient(clientname,contact_firstname,rep)values('Momentive Performance Materials', 'Sergio Vanalli', '188');
@@ -633,12 +633,22 @@ Uni Toronto	Edwin Tam	717		X
 The Benteler Group		735				 	X
 
 	*/
-insert into IPGuideRequestRecord(ip_id,client_id,iptype) select ip.id, cl.clientid, 'ISO' from IPGuide ip cross join (select max(id) clientid from IPGuideRequestClient where ClientName='RPS Group' ) cl where ip.ipname in('ISO 1540-Lifestyle Assessment') and ip.iptype='ISO';
-insert into IPGuideRequestRecord(ip_id,client_id,iptype) select ip.id, cl.clientid, 'ISO' from IPGuide ip cross join (select max(id) clientid from IPGuideRequestClient where ClientName='Fordia' ) cl where ip.ipname in('ISO 50,0001') and ip.iptype='ISO';
+insert into IPGuideRequestRecord(ip_id,client_id,iptype) 
+	select ip.id, cl.clientid, 'ISO' from IPGuide ip 
+	cross join (select max(id) clientid from IPGuideRequestClient where ClientName='Uni Toronto' ) cl 
+	where ip.ipname in('ISO 1540-Lifestyle Assessment') and ip.iptype='ISO';
+insert into IPGuideRequestRecord(ip_id,client_id,iptype) 
+	select ip.id, cl.clientid, 'ISO' from IPGuide ip 
+	cross join (select max(id) clientid from IPGuideRequestClient where ClientName='The Benteler Group' ) cl 
+	where ip.ipname in('ISO 50,0001') and ip.iptype='ISO';
  
 
  --4) Convergence data
  /*
  Abbott Laboratories		Lee	New Zealand, Pakistan, Vietnam, Hungary, Czech Republic, Slovakia, Greece, Columbia
 */
-insert into IPGuideRequestRecord(ip_id,client_id,iptype) select ip.id, cl.clientid, 'Convergence' from IPGuide ip cross join (select max(id) clientid from IPGuideRequestClient where ClientName='Abbott Laboratories' ) cl where ip.ipname in('New Zealand', 'Pakistan', 'Vietnam', 'Hungary', 'Czech Republic', 'Slovakia', 'Greece', 'Columbia') and ip.iptype='Convergence';
+insert into IPGuideRequestRecord(ip_id,client_id,iptype) 
+	select ip.id, cl.clientid, 'Convergence' from IPGuide ip 
+	cross join (select max(id) clientid from IPGuideRequestClient where ClientName='Abbott Laboratories' ) cl 
+	where ip.ipname in('New Zealand', 'Pakistan', 'Vietnam', 'Hungary', 'Czech Republic', 'Slovakia', 'Greece', 'Columbia') 
+	and ip.iptype='Convergence';

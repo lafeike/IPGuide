@@ -35,8 +35,6 @@
     </div>
     <hr />
 
-   
-
     <h3>Search</h3>
 
     <div class="tab-content">
@@ -69,9 +67,8 @@
                     </label>
                     <label class="radio-inline">
                         <input type="radio" id="r2" name="options" value="Mining" 
-                            <% 
-                                    
-                            if StrComp(iptype,"Mining",1) = 0 then
+                            <%                                     
+                                if StrComp(iptype,"Mining",1) = 0 then
                                           Response.Write("Checked")
                                     end if  
                                 %>/>
@@ -150,12 +147,9 @@
             .fail(function (textStauts, error) {
                 console.log("error:" + textStauts + ", " + error);
             });
-       
-       
     });
 
-
-        // when iptype radio button is clicked, update the dropdown list for different ip type.
+        // when iptype radio button is clicked, update the dropdown list for different ip types.
         $(":radio").change(function () {
             var iptype = $(this).attr("value")
             var jqxhr = $.getJSON("FetchSearchSelect.asp?iptype=" + iptype, function (data) {
@@ -197,7 +191,7 @@
                 rep = $("#rep option:selected").text();
             }
 
-            var data = { "iptype": iptype, "ipid":ipid, "ipname": ipname, "clientid": clientid,"client": client, "rep": rep };
+            var data = { "iptype": iptype, "ipid": ipid, "ipname": ipname, "clientid": clientid,"client": client, "rep": rep };
             var dataFromServer;
             $.get({
                 url: 'queryIPRecord.asp',

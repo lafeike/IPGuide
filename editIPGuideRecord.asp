@@ -29,7 +29,7 @@
                 "on ip.id=ipcount.ip_id " &_
                 "where ip.iptype='" & iptype & "'" &_
                 "order by num desc, ipName"
-    response.Write(strSQL)
+    'response.Write(strSQL)
     set clientRS = conn.execute(strSQL)
 
     if  not (clientRS.EOF and clientRS.BOF)  then %>
