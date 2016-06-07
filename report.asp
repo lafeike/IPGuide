@@ -16,51 +16,62 @@
 %>
 <div id="reportContainer" class="container" data-iptype="<%= iptype %>"">
     <ul class="nav nav-pills">
-      <li><a <% if strcomp(iptype, "IPs") = 0 then
-          Response.write("active")
+      <li><a  
+          <% 
+          if strcomp(iptype, "IPs") = 0 then
+            Response.write("active")
+          end if 
+          %>         
+          data-toggle="pill" href="#IPs">IPs</a></li>
+      <li><a 
+          <% 
+          if strcomp(iptype, "Mining") = 0 then
+            Response.write("active")
           end if          
-           %> data-toggle="pill" href="#IPs">IPs</a></li>
-      <li><a <% if strcomp(iptype, "Mining") = 0 then
-          Response.write("active")
+          %> 
+          data-toggle="pill" href="#Mining">Mining</a></li>
+      <li><a 
+          <% 
+          if strcomp(iptype, "ISO") = 0 then
+            Response.write("active")
           end if          
-           %> data-toggle="pill" href="#Mining">Mining</a></li>
-      <li><a <% if strcomp(iptype, "ISO") = 0 then
-          Response.write("active")
+          %> 
+          data-toggle="pill" href="#ISO">ISO</a></li>
+      <li><a 
+          <% if strcomp(iptype, "Convergence") = 0 then
+            Response.write("active")
           end if          
-           %> data-toggle="pill" href="#ISO">ISO</a></li>
-      <li><a <% if strcomp(iptype, "Convergence") = 0 then
-          Response.write("active")
-          end if          
-           %> data-toggle="pill" href="#Convergence">Convergence</a></li>
+          %> 
+          data-toggle="pill" href="#Convergence">Convergence</a></li>
     </ul>
 
     <div class="tab-content">
-        <h3>Report For &nbsp;<%= iptype %>&nbsp; Country Request</h3>
+        <h3>Report For <strong id="h3_iptype"></strong> Country Request</h3>
         <h4>&nbsp;<%= Date %> &nbsp;</h4>
         <div class="control-group">
-                <div class="row">
-                    <div class="span1 offset7">
-                        <a href="index.asp" class="btn" id="backBtn">Back</a> 
-                    </div>
-                    <div class="span1">
-                            <a href="#" class="btn exportMe">Export</a> 
-                    </div>
-                    <div class="span1">
-                            <a href="#" class="btn printMe">Print</a>   
-                    </div>                                       
-                </div> 
+            <div class="row">
+                <div class="span1 offset7">
+                    <a href="index.asp" class="btn" id="backBtn">Back</a> 
+                </div>
+                <div class="span1">
+                    <a href="#" class="btn exportMe">Export</a> 
+                </div>
+                <div class="span1">
+                    <a href="#" class="btn printMe">Print</a>   
+                </div>                                       
+            </div> 
         </div>
         
+        <div id="IPs"></div> 
+        <div id="Mining"></div> 
+        <div id="ISO"></div> 
+        <div id="Convergence"></div>  
+        <!--#include  virtual="./IPGuide/FetchReportData.asp" -->                
         
-        <div id="IPs" class="tab-pane fade in active"></div> 
-         <div id="Mining" class="tab-pane fade in active"></div> 
-         <div id="ISO" class="tab-pane fade in active"></div> 
-         <div id="Convergence" class="tab-pane fade in active"></div>  
-         <!--#include  virtual="./IPGuide/FetchReportData.asp" -->                
-             <form id="reloadForm" method="get" action="report.asp">
-                 <input type="hidden" name="iptype" id="hiddenIPtype" />
-                 <input type="hidden" name="displayNum" id="hiddenNum"/>
-             </form>
+        <form id="reloadForm" method="get" action="report.asp">
+            <input type="hidden" name="iptype" id="hiddenIPtype" />
+            <input type="hidden" name="displayNum" id="hiddenNum"/>
+        </form>
     </div>
 </div>
 <!-- /container -->
@@ -71,6 +82,7 @@
             var activeTabName = $('#reportContainer').attr("data-iptype");
             var activeItem = 'li:has(a[href="#' + activeTabName + '"])';
             $(activeItem).addClass("active");
+            $('#h3_iptype').html(activeTabName);
             //activeTab(activeTabName);
         });
 

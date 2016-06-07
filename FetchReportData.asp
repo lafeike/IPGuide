@@ -48,10 +48,10 @@
                             "where IPType= ?" &_
                             " group by ip_id) record " &_
                             "on ip.id=record.ip_id " &_
-                            "where record.requests >= ? order by record.requests desc, ipname asc" 
+                            "where record.requests >= ?" 
     Set o_cmd = Server.CreateObject("ADODB.command") 
     
-    ipSQL = "select row_number() over (order by number desc) as noo," &_
+    ipSQL = "select row_number() over (order by number desc, ipname asc) as noo," &_
                             "r.ipname, r.number, r.id as ip_id " &_
                             "from (" & SQL & ") r"      
                     
