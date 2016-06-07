@@ -48,9 +48,9 @@
     <div id="feedback_to_user" class="bg-warning text-warning"></div>
     <%  'SQL to get the IPGuideRequestRecord by the userid
         dim SQL
-        'dim UserID
-        UserID = 412 'for developing only, should be commented and use the next line when released.
-        'UserID = Session("stp_userid")
+        dim UserID
+        'UserID = 412 'for developing only, should be commented and use the next line when released.
+        UserID = Session("stp_userid")
         SQL = "select " &_
             "ipclient.clientname client, ipclient.id clientid, ipclient.contact_firstname contact, " &_
             "ipclient.contact_number contact_number,isnull(record_number,0) ip_request, ipclient.client_type ctype " &_
@@ -85,24 +85,22 @@
       <li><a data-toggle="pill" href="#Convergence">Convergence</a></li>
     </ul>
 
-    <div class="tab-content" data-ipactive="<%= iptype %>">
-        
+    <div class="tab-content" data-ipactive="<%= iptype %>">        
         <div class="control-group">
                 <div class="controls control-row">
                     <div class="span1 offset7">
                         <a href="search.asp?iptype=IPs" class="btn" id="searchBtn">Search</a> 
                     </div>
                      <div class="span1">
-                        <a href="report.asp" class="btn">Report</a> 
+                        <a href="report.asp?iptype=<%= iptype %>" class="btn" id="reportBtn">Report</a> 
                     </div>
                     <div class="span1">
                         <a href="add.asp?iptype=IPs" class="btn" id="addBtn">Add</a> 
                     </div>               
                 </div> 
-            </div><br /><br />        
+        </div><br /><br />        
+        
         <div id="IPs" class="tab-pane fade in active" data-userid="<%=UserID%>">       
-             
-                     
             <table  class="usertable table table-striped table-hover table-responsive">
                 <thead>
                     <tr>
@@ -117,10 +115,10 @@
                     <%
                         iptype = "IPs"                        
                         Set sqlcmd = Server.CreateObject("ADODB.command") 
-           sqlcmd.ActiveConnection = conn                       
-           sqlcmd.CommandText = ipSQL 
-           sqlcmd.CommandType = adCmdText
-           sqlcmd.Prepared = true
+                           sqlcmd.ActiveConnection = conn                       
+                           sqlcmd.CommandText = ipSQL 
+                           sqlcmd.CommandType = adCmdText
+                           sqlcmd.Prepared = true
                         set prm1 = sqlcmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)                       
                         sqlcmd.Parameters.Append prm1
                         'response.Write sqlcmd.CommandText
@@ -160,7 +158,6 @@
                                     This item will be permanently deleted and cannot be recovered. Are you sure?
                                 </p>
                             </div>
-                            <div class="CustomerDetails"></div>
                         </td>
                     </tr>
                     <% 
@@ -232,7 +229,6 @@
                                     This item will be permanently deleted and cannot be recovered. Are you sure?
                                 </p>
                             </div>
-                            <div class="CustomerDetails"></div>
                         </td>
                     </tr>
                     <% 
@@ -305,7 +301,6 @@
                                     This item will be permanently deleted and cannot be recovered. Are you sure?
                                 </p>
                             </div>
-                            <div class="CustomerDetails"></div>
                         </td>
                     </tr>
                     <% 
@@ -377,7 +372,6 @@
                                     This item will be permanently deleted and cannot be recovered. Are you sure?
                                 </p>
                             </div>
-                            <div class="CustomerDetails"></div>
                         </td>
                     </tr>
                     <% 
@@ -632,7 +626,7 @@
                         "label": "<i class='icon-zoom-in'></i> Close",
                         "class": "btn-small btn-info no-border",
                         "callback": function () {
-                            window.location.replace("/IPGuideRequest/index.asp?iptype=" + iptype);
+                            window.location.replace("/IPGuide/index.asp?iptype=" + iptype);
                         }
                     }],
                     {
@@ -646,6 +640,7 @@
         var target = $(e.target).attr("href") // activated tab        
         $('#searchBtn').attr("href", "search.asp?iptype=" + target.substring(1)); // skip the '#'
         $('#addBtn').attr("href", "add.asp?iptype=" + target.substring(1)); // skip the '#'
+        $('#reportBtn').attr("href", "report.asp?iptype=" + target.substring(1)); // skip the '#'
         $('.tab-content').attr("data-ipactive", target.substring(1));
         $(this).tab('show');
     });

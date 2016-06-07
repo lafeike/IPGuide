@@ -17,7 +17,7 @@
     client = Request.QueryString("client")
     rep = Request.QueryString("rep")
         
-    Response.Write("<p>" & iptype & ", " & ipname & ", " & client & ", " & rep & "</p>")
+   ' Response.Write("<p>" & iptype & ", " & ipname & ", " & client & ", " & rep & "</p>")
 
     if len(ipname) > 0 then
         hasIP = true

@@ -23,6 +23,7 @@
     responseHtml = "<section> " &_
                     "<form method=""get"" action=""./report.asp""> <div class=""form-group"">" &_
                     "<label for=""inputsm"">Display requests' number greater than or equal to: &nbsp;</label>" &_
+                    "<input type=""hidden"" name=""iptype"" value=""" & iptype & """>" &_
                     "<input id=""displayNum"" class=""form-control input-sm"" value=""" & displayNum & """ type=""number""  name=""displayNum""> &nbsp;" &_
                     "<input type=""submit"" value=""Confirm"">" &_
                     "</div>" &_
@@ -59,7 +60,7 @@
     o_cmd.CommandType = adCmdText
     o_cmd.Prepared = true
                     
-    set prm1 = o_cmd.CreateParameter("@prm1",adVarChar,adParamInput,20, ip_type)
+    set prm1 = o_cmd.CreateParameter("@prm1",adVarChar,adParamInput,20, iptype)
     set prm2 = o_cmd.CreateParameter("@prm2", adInteger,adParamInput,5,displayNum)
     o_cmd.Parameters.Append prm1
     o_cmd.Parameters.Append prm2
