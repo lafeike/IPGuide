@@ -1,27 +1,27 @@
 <!--
-    date: 2016-5-19
+    date: 2016-12-9
     author: Rafy Zhao
     description: 
         - when user click the checkbox after the IP name, update the database table IPGuideRequestRecord.
-        - to be called by /IPGuideRequest/editIPGuideRecord.asp
+        - to be called by /IPGuideRequest/editConvergence.asp
 -->
 
 <!-- #include virtual=/assets/lib/utils.asp -->
 
 <%
-       
-    ip_name = Request.Form("ip_name")
-    client_id = Request.Form("client_id")
-    ip_type = request("ip_type")
+    ip_name = request("ip_name")
+    client_id = request("client_id")
+    c_flag = request("c_flag")
     ip_id = request("ip_id")
-    dual_language = request("dual_language")        
-   
+        
+   Response.Write("ip_name is:" & ip_name)
 	' to check if there is records of this ip
     SQL = 	"select count(*) record_num from IPGuideRequestRecord " &_
             "where client_id=" & client_id &_
             " and ip_id = " & ip_id &_
-            " and iptype='" & ip_type &_
-            "'"
+            " and iptype='Convergence' " &_
+            " and dual_language=" &c_flag
+    Response.Write("select SQL: " & SQL)
     set numRS = conn.execute(SQL)
     num = numRS("record_num")
 
@@ -31,21 +31,15 @@
         updateRecord = "insert into IPGuideRequestRecord(ip_id, client_id, iptype,dual_language) " &_
                         "values(" & ip_id &_
                         "," & client_id &_
-                        ", '" & ip_type &_
-                         "', " & dual_language & ")" 
+                        ", 'Convergence'," &_
+                         c_flag & ")"
     else ' has a record, then delete it.
-        if dual_language = 0 then
-            updateRecord = "delete from IPGuideRequestRecord where " &_
+        updateRecord = "delete from IPGuideRequestRecord where " &_
                         "ip_id=" & ip_id &_
                         " and client_id=" & client_id &_
-                        " and iptype='" & ip_type & "'"
-        else
-            updateRecord = "update IPGuideRequestRecord set dual_language='1' where " &_
-                        "ip_id=" & ip_id &_
-                        " and client_id=" & client_id &_
-                        " and iptype='" & ip_type & "'"
-        end if
+                        " and iptype='Convergence' " &_
+                        " and dual_language=" &c_flag
     end if
-    
+    Response.Write("updatet SQL: " & updateRecord)
     conn.execute(updateRecord)
 %>

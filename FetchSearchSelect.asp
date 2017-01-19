@@ -11,7 +11,9 @@
     Dim jsonResponse, json1, json2, json3
 
     iptype = Request.QueryString("iptype")
-    
+    if StrComp(iptype, "Reg") = 0 then
+        iptype = "IPs"
+    end if
     'populate data for IP name dropdown list   
     json1 = """ipname"":""<option value='0'>Please choose an IP name</option>"
     query = "SELECT rtrim(ltrim(ipname)) ipname, id FROM IPGuide " &_

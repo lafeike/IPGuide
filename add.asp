@@ -16,8 +16,8 @@
         
         <div class="control-group">
                 <div class="row">
-                    <div class="span1 offset8">
-                        <a href="index.asp?iptype=<%= iptype %>" class="btn">Back</a> 
+                    <div class="span2 offset8">
+                        <a href="index.asp"  class="btn">Go Back</a>
                     </div>                              
                 </div> 
             </div>
@@ -27,23 +27,23 @@
                     <label for="inputClient" class="control-label col-xs-2">Client</label>
                     <div class="col-xs-10">
                         <input type="text" class="form-control" 
-                            id="inputClient" name="client" placeholder="client name" 
+                            id="inputClient" name="client" placeholder="Company name" 
                             required pattern=".{1,50}" title="50 characters maximum">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputContact" class="control-label col-xs-2">Contact Name</label>
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" id="inputContact" name="contact" placeholder="contact Name"
+                        <input type="text" class="form-control" id="inputContact" name="contact" placeholder="Contact name"
                             pattern=".{0,50}" title="50 characters maximum" >
                     </div>
                 </div>
                  <div class="form-group">
-                    <label for="inputNumber" class="control-label col-xs-2">Contact Number</label>
+                    <label for="input2contact" class="control-label col-xs-2">Contact 2 Name</label>
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" id="inputNumber" name="contactNumber" 
-                            placeholder="contact's telephone number"
-                            pattern=".{0,18}" title="18 characters or numbers maximum">
+                        <input type="text" class="form-control" id="input2contact" name="contact2contact" 
+                            placeholder="Contact name"
+                            pattern=".{0,50}" title="50 characters or numbers maximum">
                         <input type="hidden" value=<%=UserID %> id="inputUserid" name="userid" >
                     </div>
                 </div>
@@ -85,11 +85,11 @@
             var client, contact, contacNumber, userid;
             client = $("#inputClient").val();
             contact = $("#inputContact").val();
-            contacNumber = $("#inputNumber").val();          
+            contact2 = $("#input2contact").val();          
 
             userid = $("#inputUserid").val();
 
-           var data = { "client": client, "contact": contact, "contactNumber": contacNumber, "userid": userid };
+           var data = { "client": client, "contact": contact, "contact2": contact2, "userid": userid };
            var dataFromServer;
            $.ajax({
                url: "AddClientData.asp",

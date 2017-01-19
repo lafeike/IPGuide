@@ -8,11 +8,11 @@
                      "Uid=stp.sqlsa;" & _ 
                      "Pwd=#STP2011?;" 
         
-    dim SQL, client, contact, contacNumber, userid, num, sqlCheck
+    dim SQL, client, contact, contact2, userid, num, sqlCheck
    
     client = Request.Form("client")
-    contact = Request.Form("contact")
-    contactNumber = Request.Form("contactNumber")
+    contact = Request.Form("contact")    
+    contact2 = Request.Form("contact2")
     userid = Request.Form("userid")
 
     'check if client has existed.
@@ -25,8 +25,8 @@
         response.Write("Error: " & client & " has existed. Cannot add again.")
     else
     
-        SQL =  "insert into IPGuideRequestClient(ClientName, contact_firstname, contact_number, rep) " &_
-                "select '" & client & "','"  & contact & "','" & contactNumber & "',rep " &_
+        SQL =  "insert into IPGuideRequestClient(ClientName, contact_firstname, contact_lastname, rep) " &_
+                "select '" & client & "','"  & contact & "','" & contact2 & "',rep " &_
                 "from IPGuideRep where userid='" & userid & "'"
     
         on error resume next
@@ -34,7 +34,7 @@
         if err<>0 then
             Response.Write("Error: Failed to add the client. Please check the data and try again.")
         else
-            response.Write("Add " & client & " successuflly.")
+            response.Write(client & " was added successfully.")
         end if
     end if
 

@@ -93,7 +93,22 @@
                                 %>/>
                         Convergence
                     </label>
+                    <label class="radio-inline">
+                        <input type="radio" id="r5" name="options" value="Reg" 
+                            <% 
+                                    if StrComp(iptype,"Reg",1) = 0 then
+                                          Response.Write("Checked")
+                                    end if  
+                                %>/>
+                        REG Tracking
+                    </label>
                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dual" class="control-label col-xs-2">Dual Language Only</label>
+            <div class="col-xs-4">
+                 <input type="checkbox" id="dual" class="form-control" />
             </div>
         </div>
         <div class="form-group">
@@ -108,12 +123,13 @@
                  <select id="client" class="form-control"></select>
             </div>
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <label for="rep" class="control-label col-xs-2">Rep Number</label>
             <div class="col-xs-4">
                  <select id="rep" class="form-control"></select>
             </div>
         </div>
+        
         
         <div class="form-group">
              <label for="btnSearch" class="control-label col-xs-2 invisible">Rep Number</label>
@@ -154,6 +170,12 @@
         // when iptype radio button is clicked, update the dropdown list for different ip types.
         $(":radio").change(function () {
             var iptype = $(this).attr("value")
+            if (iptype == "Reg") {
+                $('#dual').attr('checked', false);
+                $('#dual').attr("disabled", true);
+            } else {
+                $('#dual').attr("disabled", false);
+            }
             var jqxhr = $.getJSON("FetchSearchSelect.asp?iptype=" + iptype, function (data) {
                 $.each(data, function (key, val) {
                     //console.log(key);
@@ -192,8 +214,12 @@
             if ($('#rep option:selected').val() != 0) {
                 rep = $("#rep option:selected").text();
             }
-
-            var data = { "iptype": iptype, "ipid": ipid, "ipname": ipname, "clientid": clientid,"client": client, "rep": rep };
+            
+            var dual = 0;
+            if($('#dual').is(':checked'))
+                dual = 1;
+            console.log("dual = " + dual);
+            var data = { "iptype": iptype, "ipid": ipid, "ipname": ipname, "clientid": clientid, "client": client, "rep": rep, "dual": dual };
             var dataFromServer;
             $.get({
                 url: 'queryIPRecord.asp',

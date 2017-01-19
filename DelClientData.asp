@@ -10,7 +10,7 @@
         
     dim SQL, clientid, num, sqlCheck
    
-    clientid = Request.Form("client")   
+    clientid = Request.Form("clientid")   
 
     ' to check if there is records of this ip
     sqlCheck = 	"select count(*) record_num from IPGuideRequestRecord " &_
